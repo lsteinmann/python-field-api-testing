@@ -6,7 +6,7 @@ import couchdb
 # Wenn Field läuft, dann findest du sie unter: 
 # http://localhost:3001/_utils/
 # Name ist egal, Passwort ist das Passwort, dass du in Field Desktop unter "Einstellungen" für den eigenen Synchronisationsdienst gesetzt hast
-# 
+# 6
 print('hello')
 
 # Das ist unsere Adresse für die CouchDB
