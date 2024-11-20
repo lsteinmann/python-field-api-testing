@@ -12,7 +12,7 @@ print('hello')
 # Das ist unsere Adresse für die CouchDB
 adr = 'localhost:3001'
 # Das ist jetzt unser Passwort
-pwd = ('hallo')
+pwd = ('1234567')
 # Hier definieren wir mit der couchdb-library die Verbindung
 # Schau dir das hier an: https://github.com/djc/couchdb-python/
 # und das hier: https://couchdb-python.readthedocs.io/en/latest/
