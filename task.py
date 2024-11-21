@@ -17,7 +17,7 @@ pwd = 'A12345'
 # Schau dir das hier an: https://github.com/djc/couchdb-python/
 # und das hier: https://couchdb-python.readthedocs.io/en/latest/
 # Du siehst schon: Das wird nicht mehr gepflegt und wir sollten es daher eigentlich nicht benutzen! 
-fieldConnection = couchdb.Server('http://qgis:' + {pwd} + '@' + {adr}) # das "qgis" ist dabei der Benutzername
+fieldConnection = couchdb.Server('http://qgis:' + pwd + '@' + adr) # das "qgis" ist dabei der Benutzername
 
 # leerer projects-array
 projects = []
