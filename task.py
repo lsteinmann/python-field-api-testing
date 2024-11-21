@@ -12,12 +12,12 @@ print('hello')
 # Das ist unsere Adresse für die CouchDB
 adr = 'localhost:3001'
 # Das ist jetzt unser Passwort
-pwd = ('1234567')
+pwd = 'A12345'
 # Hier definieren wir mit der couchdb-library die Verbindung
 # Schau dir das hier an: https://github.com/djc/couchdb-python/
 # und das hier: https://couchdb-python.readthedocs.io/en/latest/
 # Du siehst schon: Das wird nicht mehr gepflegt und wir sollten es daher eigentlich nicht benutzen! 
-fieldConnection = couchdb.Server('http://qgis:' + pwd + '@' + adr) # das "qgis" ist dabei der Benutzername
+fieldConnection = couchdb.Server('http://qgis:' + {pwd} + '@' + {adr}) # das "qgis" ist dabei der Benutzername
 
 # leerer projects-array
 projects = []
