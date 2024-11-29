@@ -3,9 +3,8 @@
 # vorher: pip install couchdb
 import couchdb
 import pandas as pd
-from couchdbkit import Server
 import json
-import cloudant
+
 
 # Wenn Field läuft, dann findest du sie unter: 
 # http://localhost:3001/_utils/
