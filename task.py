@@ -8,6 +8,7 @@ import json
 import cloudant
 import requests
 
+
 # Wenn Field läuft, dann findest du sie unter: 
 # http://localhost:3001/_utils/
 # Name ist egal, Passwort ist das Passwort, dass du in Field Desktop unter "Einstellungen" für den eigenen Synchronisationsdienst gesetzt hast
@@ -44,8 +45,11 @@ if "idai-field" in fieldConnection.config()['log']['file']:
         if str(prj) != "_replicator":
             projects.append(str(prj))
 
-df = pd.read_csv("task.py")
-print(df)
+#df = pd.read_csv("task.py")
+#print(df)
+
+fd = pd.read_csv("orte.csv")
+print(fd)
 
 print(projects)
 
