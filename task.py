@@ -4,9 +4,9 @@
 import couchdb
 import pandas as pd
 import json
-from couchdbkit import Server
+#from couchdbkit import Server
 import cloudant
-
+import requests
 
 # Wenn Field läuft, dann findest du sie unter: 
 # http://localhost:3001/_utils/
@@ -43,6 +43,9 @@ if "idai-field" in fieldConnection.config()['log']['file']:
     for prj in fieldConnection:
         if str(prj) != "_replicator":
             projects.append(str(prj))
+
+df = pd.read_csv("task.py")
+print(df)
 
 print(projects)
 
