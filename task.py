@@ -4,6 +4,8 @@
 import couchdb
 import pandas as pd
 import json
+from couchdbkit import Server
+import cloudant
 
 
 # Wenn Field läuft, dann findest du sie unter: 
