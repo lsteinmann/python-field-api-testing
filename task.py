@@ -13,7 +13,7 @@ import requests
 # http://localhost:3001/_utils/
 # Name ist egal, Passwort ist das Passwort, dass du in Field Desktop unter "Einstellungen" für den eigenen Synchronisationsdienst gesetzt hast
 # 6
-print('hello')
+#-------------------print('hello')
 
 # Das ist unsere Adresse für die CouchDB
 adr = 'localhost:3001'
@@ -32,13 +32,13 @@ projects = []
 # This class behaves like a dictionary of databases. For example, to get a list of database names on the server, you can simply iterate over the server object.
 
 # Suchen wir nach irgendwas, das field identifiziert um sicherzugehen, dass wir die richtige db haben:
-print("print(fieldConnection.config()) : ")
-print(fieldConnection.config())
+#---------------print("print(fieldConnection.config()) : ")
+#---------------print(fieldConnection.config())
 
 # okay, der Pfad würde helfen: 
-print("..... if ... ")
+#-----------------print("..... if ... ")
 if "idai-field" in fieldConnection.config()['log']['file']:
-    print('Connected.', 'Can now access Field Desktops project databases.')
+    #-----------print('Connected.', 'Can now access Field Desktops project databases.')
     # für j
     # now we iterate over the server object
     for prj in fieldConnection:
@@ -51,7 +51,7 @@ if "idai-field" in fieldConnection.config()['log']['file']:
 fd = pd.read_csv("orte.csv")
 print(fd)
 
-print(projects)
+#-----------print(projects)
 
 
 # Schritt 1, Problem gelöst! 
