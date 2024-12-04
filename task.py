@@ -3,6 +3,7 @@
 # vorher: pip install couchdb
 import couchdb
 import pandas as pd
+import numpy as np
 import json
 #from couchdbkit import Server
 import cloudant
@@ -50,6 +51,15 @@ if "idai-field" in fieldConnection.config()['log']['file']:
 
 fd = pd.read_csv("orte.csv")
 print(fd)
+
+#erstellen einer datenframe mit zufälligen zahlen
+data = {'spalteA': np.random.rand(100),
+'spalteB': np.random.randint(1,100,100)}
+df = pd.DataFrame(data)
+
+#speichere die dataframe als CSV
+df.to_csv("meineDaten.csv",index=False)
+print(df)
 
 #print(projects)
 
