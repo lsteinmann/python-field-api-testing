@@ -52,10 +52,11 @@ if "idai-field" in fieldConnection.config()['log']['file']:
 fd = pd.read_csv("orte.csv")
 print(fd)
 
-dbname = couchdb.Server('http://localhost:3001/_utils/')
+#sollte sich mit dem server verbinden aber ist in zeile 27 schon vorhanden
+'''dbname = couchdb.Server('http://localhost:3001/_utils/')
 db = dbname['idai-field']
 server = couchdb.Server('http://localhost:3001/_utils/') 
-'''rows = db.view('alleDateien', include_dateien=True)
+rows = db.view('alleDateien', include_dateien=True)
 alleDateien = [row['dateien'] for row in rows]
 df = pd.DataFrame(data)'''
 
