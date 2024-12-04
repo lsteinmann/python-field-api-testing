@@ -52,14 +52,18 @@ if "idai-field" in fieldConnection.config()['log']['file']:
 fd = pd.read_csv("orte.csv")
 print(fd)
 
+dbname = couchdb.Server('http://localhost:3001/_utils/')
+db = dbname[' das ist nur ein Test ']
+server = couchdb.Server('http://localhost:3001/_utils/') 
+
 #erstellen einer datenframe mit zufälligen zahlen
-data = {'spalteA': np.random.rand(100),
+''''data = {'spalteA': np.random.rand(100),
 'spalteB': np.random.randint(1,100,100)}
 df = pd.DataFrame(data)
 
 #speichere die dataframe als CSV
 df.to_csv("meineDaten.csv",index=False)
-print(df)
+print(df)'''
 
 #print(projects)
 
