@@ -53,8 +53,11 @@ fd = pd.read_csv("orte.csv")
 print(fd)
 
 dbname = couchdb.Server('http://localhost:3001/_utils/')
-db = dbname[' das ist nur ein Test ']
+db = dbname['idai-field']
 server = couchdb.Server('http://localhost:3001/_utils/') 
+'''rows = db.view('alleDateien', include_dateien=True)
+alleDateien = [row['dateien'] for row in rows]
+df = pd.DataFrame(data)'''
 
 #erstellen einer datenframe mit zufälligen zahlen
 ''''data = {'spalteA': np.random.rand(100),
@@ -69,3 +72,7 @@ print(df)'''
 
 
 # Schritt 1, Problem gelöst! 
+
+
+
+
