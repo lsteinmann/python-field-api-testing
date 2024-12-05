@@ -8,6 +8,7 @@ import json
 #from couchdbkit import Server
 import cloudant
 import requests
+from PyQt5.QtCore import QTimer
 
 
 # Wenn Field läuft, dann findest du sie unter: 
@@ -68,6 +69,12 @@ df = pd.DataFrame(data)
 #speichere die dataframe als CSV
 df.to_csv("meineDaten.csv",index=False)
 print(df)'''
+
+#orte = self.download_data("orte.csv")
+
+# Funktion in einem bestimmten Intervall aufrufen
+#QTimer.singleShot(orte.csv* 1000, self.download_data)
+#QTimer.singleShot(download_interval * 1000, self.download_data)
 
 #print(projects)
 
