@@ -5,10 +5,6 @@ import couchdb
 import pandas as pd
 import numpy as np
 import json
-#from couchdbkit import Server
-import cloudant
-import requests
-from PyQt5.QtCore import QTimer
 
 
 # Wenn Field läuft, dann findest du sie unter: 
@@ -50,12 +46,17 @@ if "idai-field" in fieldConnection.config()['log']['file']:
 #df = pd.read_csv("task.py")
 #print(df)
 
-fd = pd.read_csv("orte.csv")
-print(fd)
+#fd = pd.read_csv("orte.csv")
+#print(fd)
 
 #sollte sich mit dem server verbinden aber ist in zeile 27 schon vorhanden
-'''dbname = couchdb.Server('http://localhost:3001/_utils/')
+
+# das kannst du aber auch so ähnlich machen, wie du es getan hast: 
+dbname = couchdb.Server('http://username:A12345@localhost:3001')
 db = dbname['idai-field']
+print(db)
+
+'''
 server = couchdb.Server('http://localhost:3001/_utils/') 
 rows = db.view('alleDateien', include_dateien=True)
 alleDateien = [row['dateien'] for row in rows]
