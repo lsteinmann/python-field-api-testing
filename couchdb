@@ -15,7 +15,7 @@ except couchdb.http.ResourceNotFound:
     db = couch.create(db_name)
 
 # Dokument hinzufügen
-doc = {'name': 'Burak D', 'alter': 36, 'stadt': 'Istanbul'}
+doc = {}
 db.save(doc)
 
 # Dokument nach ID abrufen
