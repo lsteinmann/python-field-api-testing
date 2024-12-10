@@ -28,7 +28,7 @@ pwd = 'A12345'
 fieldConnection = couchdb.Server('http://qgis:' + pwd + '@' + adr) # das "qgis" ist dabei der Benutzername
 
 # leerer projects-array
-projects = []
+projects = ['TEST']
 # Was ist da überhaupt drin:
 # https://couchdb-python.readthedocs.io/en/latest/client.html#server
 # This class behaves like a dictionary of databases. For example, to get a list of database names on the server, you can simply iterate over the server object.
@@ -47,30 +47,8 @@ if "idai-field" in fieldConnection.config()['log']['file']:
         if str(prj) != "_replicator":
             projects.append(str(prj))
 
-#df = pd.read_csv("task.py")
-#print(df)
-
-fd = pd.read_csv("orte.csv")
-print(fd)
-
-#sollte sich mit dem server verbinden aber ist in zeile 27 schon vorhanden
-'''dbname = couchdb.Server('http://localhost:3001/_utils/')
-db = dbname['idai-field']
-server = couchdb.Server('http://localhost:3001/_utils/') 
-rows = db.view('alleDateien', include_dateien=True)
-alleDateien = [row['dateien'] for row in rows]
-df = pd.DataFrame(data)'''
-
-#erstellen einer datenframe mit zufälligen zahlen
-''''data = {'spalteA': np.random.rand(100),
-'spalteB': np.random.randint(1,100,100)}
-df = pd.DataFrame(data)
-
-#speichere die dataframe als CSV
-df.to_csv("meineDaten.csv",index=False)
-print(df)'''
-
-#orte = self.download_data("orte.csv")
+df = pd.read_csv("ort.csv")
+print(df)
 
 # Funktion in einem bestimmten Intervall aufrufen
 #QTimer.singleShot(orte.csv* 1000, self.download_data)
@@ -78,9 +56,4 @@ print(df)'''
 
 #print(projects)
 
-
 # Schritt 1, Problem gelöst! 
-
-
-
-
