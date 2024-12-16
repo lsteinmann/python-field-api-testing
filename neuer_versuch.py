@@ -14,6 +14,8 @@ try:
 except couch.http.ResourceNotFound:
     print("Project does not exist.")
     # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert. 
+except couchdb.http.Unauthorized:
+    print("Password is wrong")
 # Auch sinnvoll wäre es, für den Fehler couchdb.http.Unauthorized
 # couchdb.http.Unauthorized
 # eine Nachricht einzubauen, dass das Passwort falsch ist (zB!)
@@ -45,11 +47,14 @@ for docid in db:
 
 
     #print("Und jetzt nur die 'identifier' aus jedem Document:")
-    print('Ein identifier in der Datenbank:')
-    print(retrieved_doc['resource']['identifier'])
+    #print('Ein identifier in der Datenbank:')
+    #print(retrieved_doc['resource']['identifier'])
+    
     # Das hier wird nicht funktionieren, weil es nicht überall funktioniert: Versuch mal einen Weg zu finden, wie du zB mit try (wie oben) diesen Fehler umgehen kannsT!
-    print(retrieved_doc['resource']['description'])
-    print("-----------------------------------------------------------\n")
+    try:
+        print(retrieved_doc['resource']['description'])
+    except:
+        print("-----------------------------------------------------------\n")
 
 # Lesetipp: Dictionaries / dict in Python und wie man auf keys etc. zugreift
 
