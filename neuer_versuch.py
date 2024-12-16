@@ -11,7 +11,7 @@ couch = couchdb.Server('http://qgis:' + pwd + '@' + adr)
 db_name = 'idai-field'
 try:
     db = couch[db_name]
-except couch.http.ResourceNotFound:
+except couchdb.http.ResourceNotFound:
     print("Project does not exist.")
     # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert. 
 except couchdb.http.Unauthorized:
