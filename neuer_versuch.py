@@ -11,14 +11,14 @@ couch = couchdb.Server('http://qgis:' + pwd + '@' + adr)
 db_name = 'idai-field'
 try:
     db = couch[db_name]
-except couch.http.ResourceNotFound:
+except couchdb.http.ResourceNotFound:
     print("Project does not exist.")
     # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert. 
 except couchdb.http.Unauthorized:
     print("Password is wrong")
-# Auch sinnvoll wäre es, für den Fehler couchdb.http.Unauthorized
-# couchdb.http.Unauthorized
-# eine Nachricht einzubauen, dass das Passwort falsch ist (zB!)
+# Gut - jetzt macht das Script danach natürlich weiter und wirft andere Fehler...
+# Du könntest recherchieren, wie man das Script dann im Falle eines Fehler an dieser Stelle stoppt
+# oder sogar um einen Input in der Command-Line bittet, zB nach einem neuen Passwort - falls das falsche eingegeben wurde! 
 
 # Dokument hinzufügen
 # Das wollen wir nicht machen, da wir ja nur auf die Projektdatenbank, die schon existiert, zugreifen wollen!
