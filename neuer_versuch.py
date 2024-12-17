@@ -16,6 +16,9 @@ except couchdb.http.ResourceNotFound:
     # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert. 
 except couchdb.http.Unauthorized:
     print("Password is wrong")
+finally:
+    print("gebe das Passwort erneut ein: ")
+
 # Gut - jetzt macht das Script danach natürlich weiter und wirft andere Fehler...
 # Du könntest recherchieren, wie man das Script dann im Falle eines Fehler an dieser Stelle stoppt
 # oder sogar um einen Input in der Command-Line bittet, zB nach einem neuen Passwort - falls das falsche eingegeben wurde! 
@@ -54,14 +57,9 @@ for docid in db:
     try:
         print(retrieved_doc['resource']['description'])
     except:
-        print("-----------------------------------------------------------\n")
+        print("------------------------------------\n")
 
 # Lesetipp: Dictionaries / dict in Python und wie man auf keys etc. zugreift
-
-
-# Dokument löschen
-#db.delete(retrieved_doc)
-# Wir wollen auch keine Dokumente löschen, sondern sie wirklich nur sehen. 
 
 # Einfache Abfrage (alle Dokumente mit "Istanbul" finden)
 #for doc in db:
