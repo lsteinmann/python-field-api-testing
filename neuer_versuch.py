@@ -2,22 +2,55 @@ import couchdb
 
 
 adr = 'localhost:3001'
-pwd = 'A12345'
+pwd = input("put your pwd: ")
 
-# Verbindung zur CouchDB-Instanz herstellen (passe die URL an)
-couch = couchdb.Server('http://qgis:' + pwd + '@' + adr)
 
-# Datenbank auswählen oder erstellen
-db_name = 'idai-field'
-try:
-    db = couch[db_name]
-except couchdb.http.ResourceNotFound:
-    print("Project does not exist.")
-    # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert. 
-except couchdb.http.Unauthorized:
-    print("Password is wrong")
-finally:
-    print("gebe das Passwort erneut ein: ")
+notworking = True
+
+while notworking:
+    # Verbindung zur CouchDB-Instanz herstellen (passe die URL an)
+    couch = couchdb.Server('http://qgis:' + pwd + '@' + adr)
+    # Datenbank auswählen oder erstellen
+    db_name = 'idai-field'
+    try:
+        db = couch[db_name]
+
+    # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert.     
+    except couchdb.http.ResourceNotFound:   
+        print("Project does not exist.")
+
+    #das einloggen ist unmöglich, weil das Passwort falsch ist.
+    except couchdb.http.Unauthorized:       
+        print("Password is wrong")
+        pwd = input("put your new pwd: ")
+        quit()
+
+    # der Server hat irgendwelche probleme.
+    except couchdb.http.ServerError:       
+        print("ServerError")
+        quit()
+
+    # der zugang ist verboten
+    except couchdb.http.Forbidden:
+        print("authorization is forbidden")
+        quit()
+
+    except ConnectionRefusedError:
+        print("Field does not running")
+        quit()
+
+    else:
+        notworking = False
+
+
+
+    
+   
+
+
+
+
+        
 
 # Gut - jetzt macht das Script danach natürlich weiter und wirft andere Fehler...
 # Du könntest recherchieren, wie man das Script dann im Falle eines Fehler an dieser Stelle stoppt
@@ -56,7 +89,9 @@ for docid in db:
     # Das hier wird nicht funktionieren, weil es nicht überall funktioniert: Versuch mal einen Weg zu finden, wie du zB mit try (wie oben) diesen Fehler umgehen kannsT!
     try:
         print(retrieved_doc['resource']['description'])
-    except:
+    except: 
+        print("resource has no description")
+    finally:
         print("------------------------------------\n")
 
 # Lesetipp: Dictionaries / dict in Python und wie man auf keys etc. zugreift
