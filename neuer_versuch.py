@@ -1,9 +1,7 @@
 import couchdb
 
-
 adr = 'localhost:3001'
 pwd = input("put your pwd: ")
-
 
 notworking = True
 
@@ -12,10 +10,14 @@ while notworking:
     couch = couchdb.Server('http://qgis:' + pwd + '@' + adr)
     # Datenbank auswählen oder erstellen
     db_name = 'idai-field'
+
+#def fehlermeldungen(meldungen):
+
     try:
         db = couch[db_name]
 
-    # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert.     
+    # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert. 
+        
     except couchdb.http.ResourceNotFound:   
         print("Project does not exist.")
 
@@ -23,22 +25,28 @@ while notworking:
     except couchdb.http.Unauthorized:       
         print("Password is wrong")
         pwd = input("put your new pwd: ")
-        quit()
+        
 
     # der Server hat irgendwelche probleme.
     except couchdb.http.ServerError:       
         print("ServerError")
         quit()
 
-    # der zugang ist verboten
-    except couchdb.http.Forbidden:
-        print("authorization is forbidden")
-        quit()
-
     except ConnectionRefusedError:
-        print("Field does not running")
-        quit()
-
+        start =False
+    while not start : 
+        print("is Field running ?")
+        answer= input("yes or no ? : ").lower()
+        if answer == "yes":
+            print("Field doenst running")
+            print("try again : ")
+        elif answer == "no":
+            print("Field doesnt running")
+            start = True
+        
+   #     print("Unknown Error")
+   #     quit()
+    
     else:
         notworking = False
 
