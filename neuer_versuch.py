@@ -25,7 +25,6 @@ while notworking:
     except couchdb.http.Unauthorized:       
         print("Password is wrong")
         pwd = input("put your new pwd: ")
-        
 
     # der Server hat irgendwelche probleme.
     except couchdb.http.ServerError:       
@@ -33,17 +32,17 @@ while notworking:
         quit()
 
     except ConnectionRefusedError:
-        start =False
-    while not start : 
+        couchdb = False
+    while not couchdb : 
         print("is Field running ?")
         answer= input("yes or no ? : ")
         if answer == "yes":
-            print("Field doenst running")
+            
             print("try again : ")
         elif answer == "no":
-            start = True
+            couchdb = True
             print("Field doesnt running")
-            
+
    #     print("Unknown Error")
    #     quit()
     
