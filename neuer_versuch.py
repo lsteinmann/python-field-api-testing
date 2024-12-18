@@ -36,14 +36,14 @@ while notworking:
         start =False
     while not start : 
         print("is Field running ?")
-        answer= input("yes or no ? : ").lower()
+        answer= input("yes or no ? : ")
         if answer == "yes":
             print("Field doenst running")
             print("try again : ")
         elif answer == "no":
-            print("Field doesnt running")
             start = True
-        
+            print("Field doesnt running")
+            
    #     print("Unknown Error")
    #     quit()
     
