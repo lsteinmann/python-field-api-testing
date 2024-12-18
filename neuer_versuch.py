@@ -24,7 +24,7 @@ while notworking:
     #das einloggen ist unmöglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
         print("Password is wrong")
-        pwd = input("put your new pwd: ")
+        pwd = input("put your pwd again: ")
 
     # der Server hat irgendwelche probleme.
     except couchdb.http.ServerError:       
@@ -36,9 +36,10 @@ while notworking:
     while not couchdb : 
         print("is Field running ?")
         answer= input("yes or no ? : ")
+
         if answer == "yes":
-            
             print("try again : ")
+
         elif answer == "no":
             couchdb = True
             print("Field doesnt running")
