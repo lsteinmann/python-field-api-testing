@@ -3,7 +3,7 @@ import couchdb
 adr = 'localhost:3001'
 pwd = input("put your pwd: ")
 db_name = 'idai-field'
-ressource = 'testprojekt-2'
+resource = 'testprojekt-2'
 
 notworking = True
 
@@ -15,7 +15,7 @@ while notworking:
 # def fehlermeldungen(meldungen): /TODO
 
     try:
-        db = couch[db_name]
+        db = couch[db_name and resource]
 
 # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound:   
@@ -75,8 +75,8 @@ for docid in db:
     retrieved_doc = db[docid]
 # print(retrieved_doc)
     
-# print("Und jetzt nur die 'resource' in dem Document:")
-# print(retrieved_doc['resource'])
+    # print("Und jetzt nur die 'resource' in dem Document:")
+    # print(retrieved_doc['resource'])
 
 # print("Und jetzt nur die 'identifier' aus jedem Document:")
 # print('Ein identifier in der Datenbank:')
@@ -107,16 +107,3 @@ for docid in db:
 # view_results = db.view(design_doc['id'] + '/by_city')
 # for row in view_results:
 #    print(row.key, row.value)
-
-
-
-#    while not couchdb : 
-#        print("is Field running ?")
-#        answer= input("yes or no ? : ")#
-
-#        if answer == "yes":
-#            print("try again : ")#
-#
-#        elif answer == "no":
-#            couchdb = True
-#            print("Field doesnt running")
