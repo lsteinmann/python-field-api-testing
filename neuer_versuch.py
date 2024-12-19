@@ -2,8 +2,8 @@ import couchdb
 
 adr = 'localhost:3001'
 pwd = input("put your pwd: ")
-db_name = 'idai-field'
-resource = 'testprojekt-2'
+db_name = input("Please enter the identifier of your project database: ")
+# resource = 'testprojekt-2'
 
 notworking = True
 
@@ -15,11 +15,16 @@ while notworking:
 # def fehlermeldungen(meldungen): /TODO
 
     try:
-        db = couch[db_name and resource]
-
+        db = couch[db_name] 
+       
 # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound:   
-        print("Project does not exist.")
+        print("Project '" + db_name + "' does not exist. These are the project databases available on the server:")
+        for item in couch:
+            # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
+            print(item)
+        db_name = input("Please enter the name again : ")
+
 
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
@@ -33,16 +38,15 @@ while notworking:
 
 # wenn Field nicht läuft soll dieser block fragen ob es läuft oder nicht
     except ConnectionRefusedError:
-        print("is Field running ? "+ "\n" + "yes or no ?")
-        trying = input(": ")
-        if trying == "yes":
-            print("try again")
+        
+        trying = input("Is Field running? (Y/N) : ")
+        if trying == "y" or trying == "Y" :
+            print("Trying again...")
         elif trying == "":
-            print("there is an empty space")
+            print("This is an empty space. Trying again...")
         else: 
-            trying == "no"
-            print("Field doesnt running")
-            break    
+            print("Field is not running.")
+            quit()    
     else:
         notworking = False
 
@@ -78,14 +82,14 @@ for docid in db:
     # print("Und jetzt nur die 'resource' in dem Document:")
     # print(retrieved_doc['resource'])
 
-# print("Und jetzt nur die 'identifier' aus jedem Document:")
-# print('Ein identifier in der Datenbank:')
-# print(retrieved_doc['resource']['identifier'])
+    # print("Und jetzt nur die 'identifier' aus jedem Document:")
+    # print('Ein identifier in der Datenbank:')
+    # print(retrieved_doc['resource']['identifier'])
                                                         
 # Das hier wird nicht funktionieren, weil es nicht überall funktioniert: 
 # Versuch mal einen Weg zu finden, wie du zB mit try (wie oben) diesen Fehler umgehen kannsT!
     try:
-        print(retrieved_doc['resource']['description'])
+        print(retrieved_doc['resource']['identifier'])
     except: 
         print("resource has no description")
     finally:
