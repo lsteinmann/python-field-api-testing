@@ -3,6 +3,7 @@ import couchdb
 adr = 'localhost:3001'
 pwd = input("put your pwd: ")
 db_name = 'idai-field'
+ressource = 'testprojekt-2'
 
 notworking = True
 
@@ -25,8 +26,8 @@ while notworking:
         print("Password is wrong")
         pwd = input("put your pwd again: ")
 
-# der Server hat irgendwelche probleme.
-    except couchdb.http.ServerError:       
+# der Server hat irgendwelche probleme
+    except couchdb.http.ServerError:
         print("ServerError")
         quit()
 
