@@ -1,6 +1,5 @@
 import couchdb
 import getpass
-import sys
 from colorama import init,Fore,Style
 
 init()
@@ -34,6 +33,11 @@ while notworking:
             print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")
 
         db_name = input("Please enter the name again : ")
+        if db_name == input(" "):
+            quit() 
+            print("wrong input,please try again")
+        else:
+            print("everything is fine")
 
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
@@ -82,7 +86,7 @@ print("-------------")
 
 
 # Alle Dokumente ausgeben
-for docid in db :
+for docid in db:
     print(docid)
     retrieved_doc = db[docid]
 
@@ -103,7 +107,7 @@ for docid in db :
 # Das hier wird nicht funktionieren, weil es nicht überall funktioniert: 
 # Versuch mal einen Weg zu finden, wie du zB mit try (wie oben) diesen Fehler umgehen kannsT!
     try:
-        print(retrieved_doc['resource']['category'])
+        print(retrieved_doc['resource']['identifier'])
     except: 
         print("resource has no description")
     finally:
