@@ -1,7 +1,10 @@
 import couchdb
+import getpass
+import sys
 
 adr = 'localhost:3001'
-pwd = input("put your pwd: ")
+pwd = getpass.getpass("put your pwd: ")
+print("the password is : ", pwd)
 db_name = input("Please enter the identifier of your project database: ")
 # resource = 'testprojekt-2'
 
@@ -89,7 +92,7 @@ for docid in db:
 # Das hier wird nicht funktionieren, weil es nicht überall funktioniert: 
 # Versuch mal einen Weg zu finden, wie du zB mit try (wie oben) diesen Fehler umgehen kannsT!
     try:
-        print(retrieved_doc['resource']['identifier'])
+        print(retrieved_doc['resource']['Istanbul'])
     except: 
         print("resource has no description")
     finally:
