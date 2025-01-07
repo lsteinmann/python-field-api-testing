@@ -7,7 +7,8 @@ init()
 adr = 'localhost:3001'
 pwd = getpass.getpass("put your pwd: ")
 print("the password is : ", pwd)
-db_name = input("Please enter the identifier of your project database: ")
+db_name = input("Please enter the identifier of your project database: ")    #hier entsteht noch eine fehlermeldung falls nichts hinzugefügt wird
+
 # resource = 'testprojekt-2'
 
 notworking = True
@@ -33,6 +34,7 @@ while notworking:
             print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")
 
         db_name = input("Please enter the name again : ")
+        
         if db_name == input(" "):
             quit() 
             print("wrong input,please try again")
