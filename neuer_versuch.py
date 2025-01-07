@@ -28,8 +28,11 @@ while notworking:
         print("Project '" + db_name + "' does not exist. These are the project databases available on the server: ")
         for item in couch:
             # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
+            
+            #aendert die Farbe und die Form der Schrift um es besser lesen zu können...
             name = item
             print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")
+
         db_name = input("Please enter the name again : ")
 
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.

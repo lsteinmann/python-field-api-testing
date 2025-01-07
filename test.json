@@ -1,0 +1,41 @@
+{
+    "_id": "512cef38-18da-452d-ac04-b5ae1e09e150",
+    "resource": {
+      "relations": {
+        "isDepictedIn": [
+          "887cc354-7ef4-415f-9330-255f0c4b0daa"
+        ]
+      },
+      "category": "Place",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.000152587890625,
+          -0.000396728515625
+        ]
+      },
+      "identifier": "Istanbul",
+      "id": "512cef38-18da-452d-ac04-b5ae1e09e150",
+      "description": {
+        "de": "istanbul"
+      },
+      "placeName": {
+        "de": "istanbul"
+      }
+    },
+    "created": {
+      "user": "burak demir",
+      "date": "2024-11-19T07:22:02.536Z"
+    },
+    "modified": [
+      {
+        "user": "burak demir",
+        "date": "2024-11-19T13:00:40.619Z"
+      },
+      {
+        "user": "burak demir",
+        "date": "2024-12-10T13:02:26.303Z"
+      }
+    ],
+    "_rev": "3-a3cb999c15e641f0b4905b1399856361"
+  }
