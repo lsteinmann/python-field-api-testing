@@ -1,6 +1,9 @@
 import couchdb
 import getpass
 import sys
+from colorama import init,Fore,Style
+
+init()
 
 adr = 'localhost:3001'
 pwd = getpass.getpass("put your pwd: ")
@@ -22,17 +25,17 @@ while notworking:
        
 # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound:   
-        print("Project '" + db_name + "' does not exist. These are the project databases available on the server:")
+        print("Project '" + db_name + "' does not exist. These are the project databases available on the server: ")
         for item in couch:
             # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
-            print(item)
+            name = item
+            print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")
         db_name = input("Please enter the name again : ")
-
 
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
         print("Password is wrong")
-        pwd = input("put your pwd again: ")
+        pwd = getpass.getpass("put your pwd again: ")
 
 # der Server hat irgendwelche probleme
     except couchdb.http.ServerError:
@@ -74,12 +77,17 @@ print("-------------")
 # retrieved_doc['alter'] = 36
 # db.save(retrieved_doc)
 
-# Wir wollen keine neuen docs erstellen und abrufen, sondern nur schon bestehende docs angucken!
 
 # Alle Dokumente ausgeben
-for docid in db:
+for docid in db :
     print(docid)
     retrieved_doc = db[docid]
+
+    if db == input(" "):
+        quit() 
+        print("wrong input,please try again")
+    else:
+        print("everything is fine")
 # print(retrieved_doc)
     
     # print("Und jetzt nur die 'resource' in dem Document:")
@@ -92,7 +100,7 @@ for docid in db:
 # Das hier wird nicht funktionieren, weil es nicht überall funktioniert: 
 # Versuch mal einen Weg zu finden, wie du zB mit try (wie oben) diesen Fehler umgehen kannsT!
     try:
-        print(retrieved_doc['resource']['Istanbul'])
+        print(retrieved_doc['resource']['category'])
     except: 
         print("resource has no description")
     finally:
