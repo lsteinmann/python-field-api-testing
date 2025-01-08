@@ -11,11 +11,6 @@ pwd = getpass.getpass("put your pwd: ")
 print("the password is :", pwd)
 
 db_name = input("Please enter the identifier of your project database: ")
-if db_name == input(""):
-    print("wrong input")
-    quit() 
-else:
-    print(" ")
 
 # resource = 'testprojekt-2'
 
@@ -29,8 +24,11 @@ while notworking:
 # def fehlermeldungen(meldungen): /TODO
 
     try:
-        db = couch[db_name] 
-       
+        if db_name == "":
+            raise couchdb.http.ResourceNotFound
+        
+        db = couch[db_name]
+
 # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound:   
         print("Project '" + db_name + "' does not exist. These are the project databases available on the server: ")
@@ -43,12 +41,6 @@ while notworking:
 
         db_name = input("Please enter the name again : ")
         
-        if db_name == input(""):
-            print("wrong input")
-            quit()        
-        else:
-            print(" ")
-
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
         print("Password is wrong")
@@ -59,6 +51,18 @@ while notworking:
         print("ServerError")
         quit()
 
+    # #wenn der Benutzer einen tippfehler erstellt
+    # except NameError:
+    #     trying = ""
+    #     if trying == ""  != db_name:
+    #         input("empty Space !" + "\n" + "please try again: ")
+    #     elif trying != db_name:
+    #         raise couchdb.http.ResourceNotFound
+    #     else:
+    #         print("there is some Errors")
+            
+        quit()
+        
 # wenn Field nicht läuft soll dieser block fragen ob es läuft oder nicht
     except ConnectionRefusedError:
         
@@ -100,12 +104,6 @@ for docid in db:
     print(docid)
     retrieved_doc = db[docid]
 
-    # if db == input(" --------------------------------------------------------------------- "):
-    #     print("wrong input,please try again")
-    #     quit() 
-    # else:
-    #     print(" ")
-    
 # print(retrieved_doc)
     
     # print("Und jetzt nur die 'resource' in dem Document:")
