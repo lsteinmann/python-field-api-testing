@@ -51,10 +51,10 @@ while notworking:
         print("ServerError")
         quit()
 
-    # #wenn der Benutzer einen tippfehler erstellt
+# #wenn der Benutzer einen tippfehler erstellt
     # except NameError:
     #     trying = ""
-    #     if trying == ""  != db_name:
+    #     if trying == "":
     #         input("empty Space !" + "\n" + "please try again: ")
     #     elif trying != db_name:
     #         raise couchdb.http.ResourceNotFound
