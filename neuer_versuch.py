@@ -1,3 +1,5 @@
+#http://localhost:3001/_all_dbs
+
 import couchdb
 import getpass
 from colorama import init,Fore,Style
@@ -6,8 +8,14 @@ init()
 
 adr = 'localhost:3001'
 pwd = getpass.getpass("put your pwd: ")
-print("the password is : ", pwd)
-db_name = input("Please enter the identifier of your project database: ")    #hier entsteht noch eine fehlermeldung falls nichts hinzugefügt wird
+print("the password is :", pwd)
+
+db_name = input("Please enter the identifier of your project database: ")
+if db_name == input(""):
+    print("wrong input")
+    quit() 
+else:
+    print(" ")
 
 # resource = 'testprojekt-2'
 
@@ -35,11 +43,11 @@ while notworking:
 
         db_name = input("Please enter the name again : ")
         
-        if db_name == input(" "):
-            quit() 
-            print("wrong input,please try again")
+        if db_name == input(""):
+            print("wrong input")
+            quit()        
         else:
-            print("everything is fine")
+            print(" ")
 
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
@@ -92,11 +100,12 @@ for docid in db:
     print(docid)
     retrieved_doc = db[docid]
 
-    if db == input(" "):
-        quit() 
-        print("wrong input,please try again")
-    else:
-        print("everything is fine")
+    # if db == input(" --------------------------------------------------------------------- "):
+    #     print("wrong input,please try again")
+    #     quit() 
+    # else:
+    #     print(" ")
+    
 # print(retrieved_doc)
     
     # print("Und jetzt nur die 'resource' in dem Document:")
