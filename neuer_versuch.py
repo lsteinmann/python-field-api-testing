@@ -29,26 +29,28 @@ while notworking:
         
         db = couch[db_name]
 
-#wenn der Benutzer einen tippfehler erstellt
-    except NameError:
-        trying = ""
-        if trying == "":
-            input("empty Space !" + "\n" + "please try again: ")
-        elif trying != db_name:
-            raise couchdb.http.ResourceNotFound
-        else:
-            print("there is some Errors")
-        quit()
+# #wenn der Benutzer ausversehen auf Enter drückt /TODO muss ich noch machen (nicht so wichtig)
+#     except NameError:
+#         trying = ""
+#         if trying == "":
+#             input("empty Space !" + "\n" + "please try again: ")
+#         elif trying != db_name:
+#             raise couchdb.http.ResourceNotFound
+#         else:
+#             print("there is some Errors")
+#         quit()
 
-# Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert.    
+# das Script kontrolliert stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound:   
         print("Project '" + db_name + "' does not exist. These are the project databases available on the server: ")
         for item in couch:
             # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
-            
-            #aendert die Farbe und die Form der Schrift um es besser lesen zu können...
-            name = item
-            print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")
+
+        #-----------------------------------------------------------------------------------
+            #aendert die Farbe und die Form der Schrift um es besser lesen zu können...    |
+            name = item                                                                   #|
+            print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")           #|
+        #-----------------------------------------------------------------------------------
 
         db_name = input("Please enter the name again : ")
         
