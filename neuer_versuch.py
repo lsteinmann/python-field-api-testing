@@ -29,6 +29,17 @@ while notworking:
         
         db = couch[db_name]
 
+#wenn der Benutzer einen tippfehler erstellt
+    except NameError:
+        trying = ""
+        if trying == "":
+            input("empty Space !" + "\n" + "please try again: ")
+        elif trying != db_name:
+            raise couchdb.http.ResourceNotFound
+        else:
+            print("there is some Errors")
+        quit()
+
 # Hier wäre dann sinnvoll, das Script kontrolliert zu stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound:   
         print("Project '" + db_name + "' does not exist. These are the project databases available on the server: ")
@@ -51,17 +62,6 @@ while notworking:
         print("ServerError")
         quit()
 
-# #wenn der Benutzer einen tippfehler erstellt
-    # except NameError:
-    #     trying = ""
-    #     if trying == "":
-    #         input("empty Space !" + "\n" + "please try again: ")
-    #     elif trying != db_name:
-    #         raise couchdb.http.ResourceNotFound
-    #     else:
-    #         print("there is some Errors")
-            
-        quit()
         
 # wenn Field nicht läuft soll dieser block fragen ob es läuft oder nicht
     except ConnectionRefusedError:
