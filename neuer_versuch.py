@@ -29,16 +29,6 @@ while notworking:
         
         db = couch[db_name]
 
-# #wenn der Benutzer ausversehen auf Enter drückt /TODO muss ich noch machen (nicht so wichtig)
-#     except NameError:
-#         trying = ""
-#         if trying == "":
-#             input("empty Space !" + "\n" + "please try again: ")
-#         elif trying != db_name:
-#             raise couchdb.http.ResourceNotFound
-#         else:
-#             print("there is some Errors")
-#         quit()
 
 # das Script kontrolliert stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound:   
@@ -63,8 +53,7 @@ while notworking:
     except couchdb.http.ServerError:
         print("ServerError")
         quit()
-
-        
+      
 # wenn Field nicht läuft soll dieser block fragen ob es läuft oder nicht
     except ConnectionRefusedError:
         
