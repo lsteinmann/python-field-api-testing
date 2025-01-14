@@ -3,6 +3,7 @@
 import couchdb
 import getpass
 from colorama import init,Fore,Style
+import sys
 
 init()
 
@@ -29,10 +30,10 @@ while notworking:
         
         db = couch[db_name]
 
-
 # das Script kontrolliert stoppen sofern das Projekt nicht existiert.    
-    except couchdb.http.ResourceNotFound:   
-        print("Project '" + db_name + "' does not exist. These are the project databases available on the server: ")
+    except couchdb.http.ResourceNotFound or TabError: 
+        print("Project '" + Fore.RED + Style.BRIGHT + db_name + Style.RESET_ALL +
+        "' does not exist or there is an empty Space."+"\n"+"These are the project databases available on the server: ")
         for item in couch:
             # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
 
@@ -43,7 +44,7 @@ while notworking:
         #-----------------------------------------------------------------------------------
 
         db_name = input("Please enter the name again : ")
-        
+
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
         print("Password is wrong")
@@ -52,6 +53,21 @@ while notworking:
 # der Server hat irgendwelche probleme
     except couchdb.http.ServerError:
         print("ServerError")
+        quit()
+
+# tritt auf wenn es zu einem SystemFehler kommt / das heißt im Python Interpreter
+    except SystemError:
+        print("There is s System Error")
+        quit()
+
+# kann auftreten wenn der Benutzer auf zwei verschiedene Typen drückt / str und int
+    except TypeError:
+        print("please just using letters")
+        quit()
+
+# kann auftreten wenn Sonderzeichen etc. verwenden sollten
+    except UnicodeError:
+        print("Please use the formal Letters in this Country")
         quit()
       
 # wenn Field nicht läuft soll dieser block fragen ob es läuft oder nicht
