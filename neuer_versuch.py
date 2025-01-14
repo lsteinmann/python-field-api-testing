@@ -27,23 +27,42 @@ while notworking:
     try:
         if db_name == "":
             raise couchdb.http.ResourceNotFound
+        elif db_name == " ":
+            raise couchdb.http.ResourceNotFound
+        else :
+            print(db_name)
         
+        # # RuntimeError in bestimmten Situationen auslösen:
+        # if db_name:
+        #     raise RuntimeError("Hier die genaue Beschreibung des aufgetretenen Fehlers")
+
+
         db = couch[db_name]
 
 # das Script kontrolliert stoppen sofern das Projekt nicht existiert.    
-    except couchdb.http.ResourceNotFound or TabError: 
-        print("Project '" + Fore.RED + Style.BRIGHT + db_name + Style.RESET_ALL +
-        "' does not exist or there is an empty Space."+"\n"+"These are the project databases available on the server: ")
+    except couchdb.http.ResourceNotFound: 
+        print("Project " + Fore.RED + Style.BRIGHT + db_name + Style.RESET_ALL +
+        " does not exist or there is an empty space."+"\n"+"These are the project databases available on the server: ")
         for item in couch:
             # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
-
         #-----------------------------------------------------------------------------------
-            #aendert die Farbe und die Form der Schrift um es besser lesen zu können...    |
+            #ändert die Farbe und macht die Schrift fett um es besser lesen zu können...   |
             name = item                                                                   #|
             print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")           #|
         #-----------------------------------------------------------------------------------
-
         db_name = input("Please enter the name again : ")
+    
+# wird ausgelöst wenn es zu keiner bestimmten Exception gehört / TODO muss noch überarbeitet werden
+    except RuntimeError as e:
+        print(f"{Fore.RED}Ein Fehler ist aufgetreten: {str(e)}{Style.RESET_ALL}")
+        erneut_versuchen = input("Möchten Sie einen weiteren Versuch starten? (J/N): ")
+        if erneut_versuchen.lower() != 'j':
+            print("the Progtram is stopping...")
+            sys.exit(1)
+        else:
+            print("the program is starting again...")
+            continue
+        
 
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
@@ -57,7 +76,7 @@ while notworking:
 
 # tritt auf wenn es zu einem SystemFehler kommt / das heißt im Python Interpreter
     except SystemError:
-        print("There is s System Error")
+        print("There is a System Error")
         quit()
 
 # kann auftreten wenn der Benutzer auf zwei verschiedene Typen drückt / str und int
@@ -67,9 +86,9 @@ while notworking:
 
 # kann auftreten wenn Sonderzeichen etc. verwenden sollten
     except UnicodeError:
-        print("Please use the formal Letters in this Country")
+        print("Please use the formal Letters")
         quit()
-      
+
 # wenn Field nicht läuft soll dieser block fragen ob es läuft oder nicht
     except ConnectionRefusedError:
         
