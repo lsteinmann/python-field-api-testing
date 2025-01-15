@@ -3,7 +3,7 @@
 import couchdb
 import getpass
 from colorama import init,Fore,Style
-import sys
+#import sys
 
 init()
 
@@ -15,9 +15,13 @@ db_name = input("Please enter the identifier of your project database: ")
 
 # resource = 'testprojekt-2'
 
-notworking = True
+#notworking = True
 
-while notworking:
+notworking = 1
+max_tries = 3
+
+while notworking <= max_tries :
+
 # Verbindung zur CouchDB-Instanz herstellen (passe die URL an)
     couch = couchdb.Server('http://qgis:' + pwd + '@' + adr)
 # Datenbank auswählen oder erstellen
@@ -29,41 +33,38 @@ while notworking:
             raise couchdb.http.ResourceNotFound
         elif db_name == " ":
             raise couchdb.http.ResourceNotFound
-        else :
+        else:
             print(db_name)
-        
-        # # RuntimeError in bestimmten Situationen auslösen:
-        # if db_name:
-        #     raise RuntimeError("Hier die genaue Beschreibung des aufgetretenen Fehlers")
-
-
-        db = couch[db_name]
+            db = couch[db_name]
 
 # das Script kontrolliert stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound: 
         print("Project " + Fore.RED + Style.BRIGHT + db_name + Style.RESET_ALL +
         " does not exist or there is an empty space."+"\n"+"These are the project databases available on the server: ")
         for item in couch:
-            # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
-        #-----------------------------------------------------------------------------------
-            #ändert die Farbe und macht die Schrift fett um es besser lesen zu können...   |
-            name = item                                                                   #|
-            print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")           #|
-        #-----------------------------------------------------------------------------------
-        db_name = input("Please enter the name again : ")
-    
-# wird ausgelöst wenn es zu keiner bestimmten Exception gehört / TODO muss noch überarbeitet werden
+            if item != "_replicator":   # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
+                                        #_replicator wird nicht mehr angezeigt
+            
+            #ändert die Farbe und macht die Schrift fett um es besser lesen zu können...
+                name= item      
+                print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")
+                # quit()
+                notworking += 1
+                continue
+        else:
+            quit()
+        
+# wird ausgelöst wenn es zu keiner bestimmten Exception gehört 
     except RuntimeError as e:
-        print(f"{Fore.RED}Ein Fehler ist aufgetreten: {str(e)}{Style.RESET_ALL}")
-        erneut_versuchen = input("Möchten Sie einen weiteren Versuch starten? (J/N): ")
-        if erneut_versuchen.lower() != 'j':
-            print("the Progtram is stopping...")
-            sys.exit(1)
+        print(f"{Fore.RED}there is an Error: {str(e)}{Style.RESET_ALL}")
+        erneut_versuchen = input("Do you want to try again? (Y/N): ")
+        if erneut_versuchen.lower() != 'y':
+            print("the Program is stopping...")
+            quit()
         else:
             print("the program is starting again...")
             continue
         
-
 # das einloggen ist nicht möglich, weil das Passwort falsch ist.
     except couchdb.http.Unauthorized:       
         print("Password is wrong")
@@ -101,7 +102,7 @@ while notworking:
             print("Field is not running.")
             quit()    
     else:
-        notworking = False
+        notworking = 4
 
 
 print(db)
