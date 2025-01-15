@@ -1,5 +1,3 @@
-#http://localhost:3001/_all_dbs
-
 import couchdb
 import getpass
 from colorama import init,Fore,Style
@@ -21,7 +19,7 @@ notworking = 1
 max_tries = 3
 
 while notworking <= max_tries :
-
+    notworking += 1
 # Verbindung zur CouchDB-Instanz herstellen (passe die URL an)
     couch = couchdb.Server('http://qgis:' + pwd + '@' + adr)
 # Datenbank auswählen oder erstellen
@@ -34,25 +32,24 @@ while notworking <= max_tries :
         elif db_name == " ":
             raise couchdb.http.ResourceNotFound
         else:
-            print(db_name)
             db = couch[db_name]
 
 # das Script kontrolliert stoppen sofern das Projekt nicht existiert.    
     except couchdb.http.ResourceNotFound: 
+        print("----------------------")
         print("Project " + Fore.RED + Style.BRIGHT + db_name + Style.RESET_ALL +
         " does not exist or there is an empty space."+"\n"+"These are the project databases available on the server: ")
         for item in couch:
-            if item != "_replicator":   # Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
-                                        #_replicator wird nicht mehr angezeigt
-            
-            #ändert die Farbe und macht die Schrift fett um es besser lesen zu können...
+            if item != "_replicator":   
+# Versuch mal, dafür zu sorgen, dass "_replicator" nicht angezeigt wird!
+#_replicator wird nicht mehr angezeigt        
+#ändert die Farbe und macht die Schrift fett um es besser lesen zu können...
                 name= item      
-                print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")
-                # quit()
-                notworking += 1
-                continue
+                print(f"{Style.BRIGHT}{Fore.LIGHTGREEN_EX}{name}{Style.RESET_ALL}")                
         else:
-            quit()
+            print("----------------------") 
+            db_name = input("Please enter the identifier of your project database again: ")
+            continue
         
 # wird ausgelöst wenn es zu keiner bestimmten Exception gehört 
     except RuntimeError as e:
