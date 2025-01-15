@@ -15,11 +15,17 @@ db_name = input("Please enter the identifier of your project database: ")
 
 #notworking = True
 
-notworking = 1
+notworking = 0
 max_tries = 3
 
 while notworking <= max_tries :
+    if notworking == max_tries:
+        print("Maximal Versuche erreicht...")
+        quit()
+    else:
+        print(Style.BRIGHT+Fore.LIGHTRED_EX+"du hast noch", max_tries - notworking, "Versuche."+Style.RESET_ALL)
     notworking += 1
+
 # Verbindung zur CouchDB-Instanz herstellen (passe die URL an)
     couch = couchdb.Server('http://qgis:' + pwd + '@' + adr)
 # Datenbank auswählen oder erstellen
@@ -50,7 +56,8 @@ while notworking <= max_tries :
             print("----------------------") 
             db_name = input("Please enter the identifier of your project database again: ")
             continue
-        
+            
+
 # wird ausgelöst wenn es zu keiner bestimmten Exception gehört 
     except RuntimeError as e:
         print(f"{Fore.RED}there is an Error: {str(e)}{Style.RESET_ALL}")
