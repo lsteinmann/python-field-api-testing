@@ -4,54 +4,36 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------
 
 import requests
-from colorama import init,Fore,Style
+import json
 
 username = input("Enter username: ")
 password = input("Enter password: ")
 url = f"http://{username}:{password}@localhost:3001"
-notworking = True
+notworking = input("Is Field running? (Y/N) : ")
 
-#---------------------------------------------------------------------------------------------------------------------------------------------
 
-# raise ConnectionRefusedError
-# print("Connection refused")
+print("---------------------|")
 
-#--------------------------------------------------------------------------------------------------------------------------------------------
-
+#Fehlerbehandlung
+while notworking == "n" or notworking == "N" or notworking == "":
+    try:
+        print("Field does not working\nPlease try again")  
+        notworking = input("Is Field running? (Y/N) : ")
+                                                            #Ab hier muss noch weiter gearbeitet werden
+    except :                                                   
+        print("Field is working")
+        
 # Zeige alle Datenbanken an
 dbs = requests.get(f"{url}/_all_dbs").json()
 
 #blendet "_repliicator" aus, da diese Datenbank nicht angezeigt werden soll
-print("--------------------")
+print("--------------------°")
 for db in dbs:
     if db !="_replicator": 
-        name = db
-        print(Fore.LIGHTYELLOW_EX+Style.BRIGHT+f"{name}"+Style.RESET_ALL)
+        print(f"{db}")
 
 # Benutzer wählt eine Datenbank aus
 selected_db = (input("\nSelect database: "))
-   
+
 # Zeige alle Dokumente der ausgewählten Datenbank an
 print(requests.get(f"{url}/{selected_db}/_all_docs").json())
-
-#----------------------------------------------------------------------------------------------------------------------------------------------
-
-
-#----------------------------------------------------------------------------------------------------------------------------------------------
-
-# #Fehlerbehandlung
-# while notworking:
-#     try:
-#         print("--------------------")
-#         quit()
-#     except ConnectionRefusedError:
-#         print("Connection refused. Please check your credentials and try again.")
-#         quit()
-#     except requests.exceptions.ConnectionError:
-#         print("Connection error. Please check your network connection and try again.")
-#         quit()
-#     except requests.exceptions.Timeout:
-#         print("Request timed out. Please try again later.")
-#         quit()
-
-#-----------------------------------------------------------------------------------------------------------------------------------------------      
