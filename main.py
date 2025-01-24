@@ -5,15 +5,13 @@
 import requests
 import json
 
-notworking = False
 status_code = True
 url = "http://localhost:3001"
-
-if not check_status():
-    print("Please start Field Desktop before continuing")
-    exit()
+check_status = False
 
 def check_status():
+
+      
     try:
         response = requests.get(url)
         if response.status_code == 200:
@@ -26,6 +24,9 @@ def check_status():
         print("Field Desktop is not running")
         return False
 
+if not check_status():
+    print("Please start Field Desktop before continuing")
+    exit() 
 
 username = input("Enter username: ")
 password = input("Enter password: ")
