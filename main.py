@@ -6,21 +6,30 @@ import requests
 import json
 
 notworking = False
+status_code = True
 url = "http://localhost:3001"
 
-try: 
-    field_status = requests.get(url).json()
-except: 
-    notworking = True
+def Statusueberpruefung ():  
+    try: 
+        field_status = requests.get(url).json()
+    except: 
+        notworking = True
 
-# if notworking == True:
-#     print("Field is not working \n Please try again \n start your Field1")
-  
+    if notworking == True:
+        print("Server nicht erreichbar")
+    else:
+        print(field_status["status"])
+
+if Statusueberpruefung == 200: 
+    print("Request was successful!") 
+    print(Statusueberpruefung.json()) 
+else:
+    print("Something went wrong!")
+
 username = input("Enter username: ")
 password = input("Enter password: ")
 
 url = f"http://{username}:{password}@localhost:3001"
-
 
 print("---------------------|")
 
