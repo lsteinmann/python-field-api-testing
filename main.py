@@ -48,3 +48,36 @@ select_db = (input("\nSelect database: "))
 
 # Zeige alle Dokumente der ausgewählten Datenbank an
 print(requests.get(f"{url}/{select_db}/_all_docs").json())
+
+
+# Hier definieren wir einen 'query' für die Datenbank. Wie das funktioniert kannst du
+# auch unter localhost:3001/_utils ausprobieren, indem du dort auf ein Datenbankprojekt klickst und dann 
+# links 'Run a Query with Mango' auswählst. 
+# Das ist hier dokumentiert: https://docs.couchdb.org/en/stable/api/database/find.html#
+# Aber auch ChatGPT kann dir erklären, wie genau das funktioniert. Du musst dafür nur das Datenmodell von Field
+# ganz gut verstehen (= alles, was innerhalb von "resource" ist).
+query = {
+    "selector": {
+        "resource.category": {"$in": ["Trench", "Pottery", "Feature"]}
+    }
+}
+# Spiel auch hiermal mal herum, um unterschiedliche DInge herauszubekommen oder andere Anfragen zu stellen
+# es ist wichtig, dass du lernst, wie diese queries funktionieren, da wir ohne die das plugin nicht bauen
+# können
+
+# Hier schicken wir dann statt mit get() nun mit post() eine besondere Anfrage an die API
+# das ist der query, den wir oben geschrieben haben
+response = requests.post(f'{url}/{select_db}/_find', json = query)
+# das muss mit "post" passieren, weil wir ja nicht nur sehen wollen, was unter einer bestimmten 
+# Adresse *immer* angezeigt wird, sondern wir mit pouchdb reden wollen, d.h. 
+# wir "schicken" auch etwas (den query) an pouchdb
+
+# Hier machen wir den response zu einem python dictionary:
+result = response.json()
+
+# Und nun versuch mal, alle "documents" da raus zu bekommen und dann aus allen 
+# documents irgendwas, das du sehen möchtest, in der Konsole anzeigen zu lassen: 
+docs = ...?
+
+for doc in docs:
+    print( ??? )
