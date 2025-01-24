@@ -10,8 +10,7 @@ url = "http://localhost:3001"
 check_status = False
 
 def check_status():
-
-      
+    print("Checking status...")
     try:
         response = requests.get(url)
         if response.status_code == 200:
