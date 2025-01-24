@@ -9,22 +9,23 @@ notworking = False
 status_code = True
 url = "http://localhost:3001"
 
-def Statusueberpruefung ():  
-    try: 
-        field_status = requests.get(url).json()
-    except: 
-        notworking = True
+if not check_status():
+    print("Please start Field Desktop before continuing")
+    exit()
 
-    if notworking == True:
-        print("Server nicht erreichbar")
-    else:
-        print(field_status["status"])
+def check_status():
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            print("Field Desktop is running")
+            return response.status_code
+        else:
+            print(f"Field Desktop returned status code: {response.status_code}")
+            return response.status_code
+    except requests.ConnectionError:
+        print("Field Desktop is not running")
+        return False
 
-if Statusueberpruefung == 200: 
-    print("Request was successful!") 
-    print(Statusueberpruefung.json()) 
-else:
-    print("Something went wrong!")
 
 username = input("Enter username: ")
 password = input("Enter password: ")
