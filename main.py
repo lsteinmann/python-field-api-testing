@@ -46,8 +46,7 @@ for db in dbs:
 # Benutzer wählt eine Datenbank aus
 select_db = (input("\nSelect database: "))
 
-# Zeige alle Dokumente der ausgewählten Datenbank an
-print(requests.get(f"{url}/{select_db}/_all_docs").json())
+# Zeile würde gelöscht 
 
 
 # Hier definieren wir einen 'query' für die Datenbank. Wie das funktioniert kannst du
