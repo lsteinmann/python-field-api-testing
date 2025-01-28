@@ -76,7 +76,7 @@ result = response.json()
 
 # Und nun versuch mal, alle "documents" da raus zu bekommen und dann aus allen 
 # documents irgendwas, das du sehen möchtest, in der Konsole anzeigen zu lassen: 
-docs = ...?
+docs = result["docs"]
 
 for doc in docs:
-    print( ??? )
+    print( doc["resource"]["category"], " " ,doc["resource"]["shortDescription"] )
