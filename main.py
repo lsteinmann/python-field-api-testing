@@ -57,7 +57,7 @@ select_db = (input("\nSelect database: "))
 # ganz gut verstehen (= alles, was innerhalb von "resource" ist).
 query = {
     "selector": {
-        "resource.category": {"$in": ["Trench", "Pottery", "Feature"]}
+        "resource.category": {"$in": ["Trench"]}
     }
 }
 # Spiel auch hiermal mal herum, um unterschiedliche DInge herauszubekommen oder andere Anfragen zu stellen
@@ -79,4 +79,4 @@ result = response.json()
 docs = result["docs"]
 
 for doc in docs:
-    print( doc["resource"]["category"], " " ,doc["resource"]["shortDescription"] )
+    print(doc["resource"]["category"], " " ,doc["resource"]["shortDescription"] )
