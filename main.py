@@ -85,5 +85,7 @@ for doc in docs:
 print("--------------------")
 
 select_query = (input("\nSelect query: "))
+
+#TODO Auswahl und Ausgabe funktionieren, jedoch nicht mit dem Namen,sondern mit einer Nummer
 print(docs[int(select_query)])
 
