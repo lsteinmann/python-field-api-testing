@@ -1,7 +1,6 @@
 # json.dumps(): Converts a Python object into a JSON string. / konvertiert einen Python Objekt in eine JSON Zeichenkette
 # json.loads(): Converts a JSON string into a Python object. / konvertiert eine JSON Zeichenkette in ein Python Objekt
 #---------------------------------------------------------------------------------------------------------------------------------------------
-
 import requests
 import json
 
@@ -9,23 +8,23 @@ status_code = True
 url = "http://localhost:3001"
 check_status = False
 
-def check_status():
-    print("Checking status...")
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            print("Field Desktop is running")
-            return response.status_code
-        else:
-            print(f"Field Desktop returned status code: {response.status_code}")
-            return response.status_code
-    except requests.ConnectionError:
-        print("Field Desktop is not running")
-        return False
+# def check_status():
+#     print("Checking status...")
+#     try:
+#         response = requests.get(url)
+#         if response.status_code == 200:
+#             print("Field Desktop is running")
+#             return response.status_code
+#         else:
+#             print(f"Field Desktop returned status code: {response.status_code}")
+#             return response.status_code
+#     except requests.ConnectionError:
+#         print("Field Desktop is not running")
+#         return False
 
-if not check_status():
-    print("Please start Field Desktop before continuing")
-    exit() 
+# if not check_status():
+#     print("Please start Field Desktop before continuing")
+#     exit() 
 
 username = input("Enter username: ")
 password = input("Enter password: ")
@@ -37,17 +36,15 @@ print("---------------------|")
 # Zeige alle Datenbanken an
 dbs = requests.get(f"{url}/_all_dbs").json()
 
+
 #blendet "_repliicator" aus, da diese Datenbank nicht angezeigt werden soll
 print("--------------------°")
 for db in dbs:
     if db !="_replicator": 
         print(f"{db}")
 
-# Benutzer wählt eine Datenbank aus
+#Benutzer wählt eine Datenbank aus
 select_db = (input("\nSelect database: "))
-
-# Zeile würde gelöscht 
-
 
 # Hier definieren wir einen 'query' für die Datenbank. Wie das funktioniert kannst du
 # auch unter localhost:3001/_utils ausprobieren, indem du dort auf ein Datenbankprojekt klickst und dann 
@@ -55,11 +52,17 @@ select_db = (input("\nSelect database: "))
 # Das ist hier dokumentiert: https://docs.couchdb.org/en/stable/api/database/find.html#
 # Aber auch ChatGPT kann dir erklären, wie genau das funktioniert. Du musst dafür nur das Datenmodell von Field
 # ganz gut verstehen (= alles, was innerhalb von "resource" ist).
+                                                                    #TODO hier ein Auswahlmenü erstellen 
 query = {
     "selector": {
-        "resource.category": {"$in": ["Trench"]}
+        "_id": {
+      "$gt": "0"
     }
+  }
 }
+
+
+
 # Spiel auch hiermal mal herum, um unterschiedliche DInge herauszubekommen oder andere Anfragen zu stellen
 # es ist wichtig, dass du lernst, wie diese queries funktionieren, da wir ohne die das plugin nicht bauen
 # können
@@ -79,4 +82,5 @@ result = response.json()
 docs = result["docs"]
 
 for doc in docs:
-    print(doc["resource"]["category"], " " ,doc["resource"]["shortDescription"] )
+    print(doc["_id"][:10])
+
