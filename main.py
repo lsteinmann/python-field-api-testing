@@ -86,14 +86,11 @@ print("--------------------")
 
 select_query = (input("\nSelect query: "))
 
-# #Auswahl und Ausgabe funktionieren / erledigt
-# print(docs[all(select_query)])
-
 for doc in docs:
     if select_query in doc['_id']:
-        print("Found document:")
-        print(doc)
-        
+        print("document found:")
+        print(json.dumps(doc, indent=4))
+
 print("--------------------")
 
 
