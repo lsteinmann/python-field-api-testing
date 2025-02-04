@@ -59,7 +59,7 @@ query = {
   }
 }
 
-# Spiel auch hiermal mal herum, um unterschiedliche DInge herauszubekommen oder andere Anfragen zu stellen
+# Spiel auch hiermal mal herum, um unterschiedliche Dinge herauszubekommen oder andere Anfragen zu stellen
 # es ist wichtig, dass du lernst, wie diese queries funktionieren, da wir ohne die das plugin nicht bauen
 # können
 
@@ -76,7 +76,7 @@ result = response.json()
 print("--------------------")
 
 # Und nun versuch mal, alle "documents" da raus zu bekommen und dann aus allen 
-# documents irgendwas, das du sehen möchtest, in der Konsole anzeigen zu lassen: 
+# documents irgendwas, das du sehen möchtest, in der Konsole anzeigen zu lassen: / Erledigt
 
 docs = result["docs"]
 
@@ -86,6 +86,14 @@ print("--------------------")
 
 select_query = (input("\nSelect query: "))
 
-#TODO Auswahl und Ausgabe funktionieren, jedoch nicht mit dem Namen,sondern mit einer Zahl
-print(docs[all(select_query)])
+# #Auswahl und Ausgabe funktionieren / erledigt
+# print(docs[all(select_query)])
+
+for doc in docs:
+    if select_query in doc['_id']:
+        print("Found document:")
+        print(doc)
+        
+print("--------------------")
+
 
